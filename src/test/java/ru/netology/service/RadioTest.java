@@ -12,10 +12,10 @@ public class RadioTest {
         assertEquals(3, radio.getCurrentWave());
 
         radio.setCurrentWave(6);
-        assertEquals(5, radio.getCurrentWave());
+        assertEquals(0, radio.getCurrentWave());
 
-        radio.setCurrentWave(0);
-        assertEquals(1, radio.getCurrentWave());
+        radio.setCurrentWave(-1);
+        assertEquals(0, radio.getCurrentWave());
     }
 
     @Test
@@ -26,24 +26,31 @@ public class RadioTest {
         assertEquals(4, radio.getCurrentWave());
 
         radio.next();
-        assertEquals(5, radio.getCurrentWave());
+        assertEquals(0, radio.getCurrentWave());
 
         radio.next();
         assertEquals(1, radio.getCurrentWave());
     }
 
+
+    @Test
+    public void testDefaultConstructor() {
+        Radio radio = new Radio();
+        assertEquals(0, radio.getCurrentWave());
+    }
+
+    @Test
+    public void testConstructorWithMaxWave() {
+        Radio radio = new Radio(8);
+        assertEquals(8, radio.getCurrentWave());
+    }
+
     @Test
     public void testPrev() {
-        Radio radio = new Radio(5);
-        radio.setCurrentWave(3);
+        Radio radio = new Radio();
+        radio.setCurrentWave(0);
         radio.prev();
-        assertEquals(2, radio.getCurrentWave());
-
-        radio.prev();
-        assertEquals(1, radio.getCurrentWave());
-
-        radio.prev();
-        assertEquals(5, radio.getCurrentWave());
+        assertEquals(9, radio.getCurrentWave());
     }
 
     @Test
